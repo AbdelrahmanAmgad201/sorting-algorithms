@@ -1,48 +1,27 @@
 package org.example;
 
+import org.example.strategies.SortingStrategy;
+
 import java.util.List;
 
 public class Sort_Array {
-    private int[] arr;
+    private final int[] arr;
+    private SortingStrategy sortingStrategy; // Private to enforce encapsulation
 
-    public Sort_Array(String arrayPath) {
-        // TO DO: Read the array from a file
+    public Sort_Array(SortingStrategy sortingStrategy, String arrayPath) {
+        this.sortingStrategy = sortingStrategy;
         this.arr = readArrayFromFile(arrayPath);
     }
 
-    public List<int[]> sorter(SortType sortType, boolean takeIntermediateSteps) {
-        return switch (sortType) {
-            case simple -> simpleSort();
-            case efficient -> efficientSort();
-            case nonComparative -> nonComparativeSort();
-            default -> null;
-        };
-    }
-    // example pseudo code for sorting algorithms
-//    public List<int[]> bubbleSort(boolean intermediate) {
-//        int[] arr = data.clone();
-//        List<int[]> steps = new ArrayList<>();
-//
-//        // Sorting logic here...
-//        // If intermediate is true, add snapshots of the array to steps
-//
-//        return intermediate ? steps : List.of(arr);
-//    }
-
-    private List<int[]> simpleSort(boolean takeIntermediateSteps) {
-        // TO DO: implement any sorting technique in another function and call it here
-        return arr; // eg return bubbleSort(takeIntermediateSteps);
-    }
-    private List<int[]> efficientSort(boolean takeIntermediateSteps) {
-        // TO DO: implement any sorting technique in another function and call it here
-        return new; // eg return mergeSort(takeIntermediateSteps);
-    }
-    private List<int[]> nonComparativeSort() {
-        // TO DO: implement any sorting technique in another function and call it here
-        return arr; // eg return radixSort(takeIntermediateSteps);
-    }
-    private int[] readArrayFromFile(String arrayPath) {
-        // TO DO: Read the array from a file
+    public void setSortingStrategy(SortingStrategy sortingStrategy) {
+        this.sortingStrategy = sortingStrategy;
     }
 
+    public List<int[]> sort() {
+        return sortingStrategy.sort(arr);
+    }
+    int[] readArrayFromFile(String arrayPath) {
+        // TO DO: Implement the readArrayFromFile function
+        return new int[0];
+    }
 }
