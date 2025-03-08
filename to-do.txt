@@ -1,7 +1,7 @@
 1) Read file into array
 2) Sorting Algorithms
 	O(n^2)
-	O(n logn)
+	O(n logn) DONE
 	O(n)
 3) Main Function
 4) Unit Tests 
