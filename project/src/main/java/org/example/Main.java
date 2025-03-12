@@ -1,10 +1,17 @@
 package org.example;
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+import org.example.commandInterface.State;
+import org.example.commandInterface.ArrayInputMenu;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-       // TO DO: Implement the main function
-       // Read file path from user and prompt him to choose the sorting technique
-       // print sorted array (and maybe time taken to sort)
+        Scanner scanner = new Scanner(System.in);
+        State state = new ArrayInputMenu(scanner, "");
+        while (true && state != null) {
+            state.excute();
+            state = state.nextState();
+        }
+        System.out.println("Error: entered null state");
     }
 }

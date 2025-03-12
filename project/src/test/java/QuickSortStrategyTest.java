@@ -1,6 +1,3 @@
-
-
-
 import org.example.strategies.QuickSortStrategy;
 import org.example.strategies.SortingStrategy;
 import org.junit.jupiter.api.Test;
@@ -8,7 +5,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MergeSortStrategyTest {
+class QuickSortStrategyTest {
     @Test
     void testMergeSortWithTime() {
         SortingStrategy mergeSort = new QuickSortStrategy();
