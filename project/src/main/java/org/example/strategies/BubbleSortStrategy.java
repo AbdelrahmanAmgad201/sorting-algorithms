@@ -7,7 +7,8 @@ public class BubbleSortStrategy implements SortingStrategy {
     @Override
     public List<int[]> sort(int[] array) {
         List<int[]> steps = new ArrayList<>();
-        steps.add(array.clone());
+        if(array.length==1||array.length==0)
+            steps.add(array.clone());
         BubbleSort(array, steps);
         return steps;
     }

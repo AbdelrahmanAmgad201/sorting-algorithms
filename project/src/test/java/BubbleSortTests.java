@@ -1,12 +1,11 @@
-import org.example.strategies.BubbleSortStrategy;
-import org.example.strategies.MergeSortStrategy;
-import org.example.strategies.SortingStrategy;
+import org.example.strategies.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 public class BubbleSortTests {
+    SortingStrategy[] Sorters={new BubbleSortStrategy(),new MergeSortStrategy(),new QuickSortStrategy(),NonComparisonSort.getInstance()};
     int[][][] testCases = {
             // Test Case 1: Already sorted
             {{1, 4, 6, 17, 90, 91}, {1, 4, 6, 17, 90, 91}},
@@ -65,15 +64,11 @@ public class BubbleSortTests {
             // Test Case 20: Array with three elements
             {{3, 1, 2}, {1, 2, 3}}
         };
-    @Test
-    public void Test0(){
-        int []input=testCases[0][0];
-        int []expectedOutput=testCases[0][1];
-        List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
-        SortingStrategy[] Sorters={new BubbleSortStrategy(),new MergeSortStrategy()};
+
+    void HelperFunction(List<Double> durationsTaken,int []input,int[]expectedOutput){
         for(int i=0;i<Sorters.length;i++) {
             long startTime = System.nanoTime();
-            List<int[]> steps = Sorters[0].sort(input);
+            List<int[]> steps = Sorters[i].sort(input);
             assertNotNull(steps);
             assertFalse(steps.isEmpty());
             long endTime = System.nanoTime();
@@ -81,11 +76,17 @@ public class BubbleSortTests {
             int[] output = steps.get(steps.size()-1);
             assertArrayEquals(expectedOutput,output);
         }
-
-
-
         System.out.println("BubbleSort took "+durationsTaken.get(0)+ " milliseconds");
         System.out.println("Merge took "+durationsTaken.get(1)+ " milliseconds");
+        System.out.println("Quick Sort took "+durationsTaken.get(2)+ " milliseconds");
+        System.out.println("Radix Sort took "+durationsTaken.get(3)+ " milliseconds");
+    }
+    @Test
+    public void Test0(){
+        int []input=testCases[0][0];
+        int []expectedOutput=testCases[0][1];
+        List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
+        HelperFunction(durationsTaken,input,expectedOutput);
 
     }
     @Test
@@ -93,22 +94,8 @@ public class BubbleSortTests {
         int []input=testCases[1][0];
         int []expectedOutput=testCases[1][1];
         List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
-        SortingStrategy[] Sorters={new BubbleSortStrategy(),new MergeSortStrategy()};
-        for(int i=0;i<Sorters.length;i++) {
-            long startTime = System.nanoTime();
-            List<int[]> steps = Sorters[0].sort(input);
-            assertNotNull(steps);
-            assertFalse(steps.isEmpty());
-            long endTime = System.nanoTime();
-            durationsTaken.add((endTime-startTime)/1_000_000.0);
-            int[] output = steps.get(steps.size()-1);
-            assertArrayEquals(expectedOutput,output);
-        }
+        HelperFunction(durationsTaken,input,expectedOutput);
 
-
-
-        System.out.println("BubbleSort took "+durationsTaken.get(0)+ " milliseconds");
-        System.out.println("Merge took "+durationsTaken.get(1)+ " milliseconds");
 
     }
     @Test
@@ -116,22 +103,7 @@ public class BubbleSortTests {
         int []input=testCases[2][0];
         int []expectedOutput=testCases[2][1];
         List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
-        SortingStrategy[] Sorters={new BubbleSortStrategy(),new MergeSortStrategy()};
-        for(int i=0;i<Sorters.length;i++) {
-            long startTime = System.nanoTime();
-            List<int[]> steps = Sorters[0].sort(input);
-            assertNotNull(steps);
-            assertFalse(steps.isEmpty());
-            long endTime = System.nanoTime();
-            durationsTaken.add((endTime-startTime)/1_000_000.0);
-            int[] output = steps.get(steps.size()-1);
-            assertArrayEquals(expectedOutput,output);
-        }
-
-
-
-        System.out.println("BubbleSort took "+durationsTaken.get(0)+ " milliseconds");
-        System.out.println("Merge took "+durationsTaken.get(1)+ " milliseconds");
+        HelperFunction(durationsTaken,input,expectedOutput);
 
     }
 
@@ -142,24 +114,9 @@ public class BubbleSortTests {
         List<Double> durationsTaken = new ArrayList<>(); // This array holds the values in milliseconds
 
         // Include both BubbleSortStrategy and MergeSortStrategy
-        SortingStrategy[] sorters = {new BubbleSortStrategy(),new MergeSortStrategy()};
+        SortingStrategy[] sorters = {new BubbleSortStrategy(),new MergeSortStrategy(),new QuickSortStrategy(), NonComparisonSort.getInstance()};
 
-        for (int i = 0; i < sorters.length; i++) {
-            long startTime = System.nanoTime();
-            List<int[]> steps = sorters[i].sort(input); // Use sorters[i] instead of sorters[0]
-            long endTime = System.nanoTime();
-
-            // Add the duration in milliseconds
-            durationsTaken.add((endTime - startTime) / 1_000_000.0);
-
-            // Validate the final sorted array
-            int[] output = steps.get(steps.size() - 1);
-            assertArrayEquals(expectedOutput, output);
-        }
-
-        // Print the durations
-        System.out.println("BubbleSort took " + durationsTaken.get(0) + " milliseconds");
-        System.out.println("MergeSort took " + durationsTaken.get(1) + " milliseconds");
+       HelperFunction(durationsTaken,input,expectedOutput);
     }
 
     @Test
@@ -167,22 +124,131 @@ public class BubbleSortTests {
         int []input=testCases[4][0];
         int []expectedOutput=testCases[4][1];
         List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
-        SortingStrategy[] Sorters={new BubbleSortStrategy(),new MergeSortStrategy()};
-        for(int i=0;i<Sorters.length;i++) {
-            long startTime = System.nanoTime();
-            List<int[]> steps = Sorters[0].sort(input);
-            assertNotNull(steps);
-            assertFalse(steps.isEmpty());
-            long endTime = System.nanoTime();
-            durationsTaken.add((endTime-startTime)/1_000_000.0);
-            int[] output = steps.get(steps.size()-1);
-            assertArrayEquals(expectedOutput,output);
-        }
+        HelperFunction(durationsTaken,input,expectedOutput);
+    }
+    @Test
+    public void Test5(){
+        int []input=testCases[5][0];
+        int []expectedOutput=testCases[5][1];
+        List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
+        HelperFunction(durationsTaken,input,expectedOutput);
+
+    }
+    @Test
+    public void Test6(){
+        int []input=testCases[6][0];
+        int []expectedOutput=testCases[6][1];
+        List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
+        HelperFunction(durationsTaken,input,expectedOutput);
 
 
+    }
+    @Test
+    public void Test7(){
+        int []input=testCases[7][0];
+        int []expectedOutput=testCases[7][1];
+        List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
+        HelperFunction(durationsTaken,input,expectedOutput);
 
-        System.out.println("BubbleSort took "+durationsTaken.get(0)+ " milliseconds");
-        System.out.println("Merge took "+durationsTaken.get(1)+ " milliseconds");
+    }
 
+    @Test
+    public void Test8() {
+        int []input=testCases[8][0];
+        int []expectedOutput=testCases[8][1];
+        List<Double> durationsTaken = new ArrayList<>(); // This array holds the values in milliseconds
+
+        // Include both BubbleSortStrategy and MergeSortStrategy
+        SortingStrategy[] sorters = {new BubbleSortStrategy(),new MergeSortStrategy(),new QuickSortStrategy(), NonComparisonSort.getInstance()};
+
+       HelperFunction(durationsTaken,input,expectedOutput);
+    }
+
+    @Test
+    public void Test9(){
+        int []input=testCases[9][0];
+        int []expectedOutput=testCases[9][1];
+        List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
+        HelperFunction(durationsTaken,input,expectedOutput);
+    }
+    @Test
+    public void Test10(){
+        int []input=testCases[10][0];
+        int []expectedOutput=testCases[10][1];
+        List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
+        HelperFunction(durationsTaken,input,expectedOutput);
+
+    }
+    @Test
+    public void Test11(){
+        int []input=testCases[11][0];
+        int []expectedOutput=testCases[11][1];
+        List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
+        HelperFunction(durationsTaken,input,expectedOutput);
+
+
+    }
+    @Test
+    public void Test12(){
+        int []input=testCases[12][0];
+        int []expectedOutput=testCases[12][1];
+        List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
+        HelperFunction(durationsTaken,input,expectedOutput);
+
+    }
+
+    @Test
+    public void Test13() {
+        int []input=testCases[13][0];
+        int []expectedOutput=testCases[13][1];
+        List<Double> durationsTaken = new ArrayList<>(); // This array holds the values in milliseconds
+
+        // Include both BubbleSortStrategy and MergeSortStrategy
+        SortingStrategy[] sorters = {new BubbleSortStrategy(),new MergeSortStrategy(),new QuickSortStrategy(), NonComparisonSort.getInstance()};
+
+       HelperFunction(durationsTaken,input,expectedOutput);
+    }
+
+    @Test
+    public void Test14(){
+        int []input=testCases[14][0];
+        int []expectedOutput=testCases[14][1];
+        List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
+        HelperFunction(durationsTaken,input,expectedOutput);
+    }
+    @Test
+    public void Test15(){
+        int []input=testCases[15][0];
+        int []expectedOutput=testCases[15][1];
+        List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
+        HelperFunction(durationsTaken,input,expectedOutput);
+
+    }
+    @Test
+    public void Test16(){
+        int []input=testCases[16][0];
+        int []expectedOutput=testCases[16][1];
+        List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
+        HelperFunction(durationsTaken,input,expectedOutput);
+    }
+    @Test
+    public void Test17(){
+        int []input=testCases[17][0];
+        int []expectedOutput=testCases[17][1];
+        List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
+        HelperFunction(durationsTaken,input,expectedOutput);
+
+    }
+
+    @Test
+    public void Test18() {
+        int []input=testCases[18][0];
+        int []expectedOutput=testCases[18][1];
+        List<Double> durationsTaken = new ArrayList<>(); // This array holds the values in milliseconds
+
+        // Include both BubbleSortStrategy and MergeSortStrategy
+        SortingStrategy[] sorters = {new BubbleSortStrategy(),new MergeSortStrategy(),new QuickSortStrategy(), NonComparisonSort.getInstance()};
+
+       HelperFunction(durationsTaken,input,expectedOutput);
     }
 }

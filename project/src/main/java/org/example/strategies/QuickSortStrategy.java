@@ -10,7 +10,7 @@ public class QuickSortStrategy implements SortingStrategy {
     public List<int[]> sort(int[] array) {
         steps = new ArrayList<>();
         quickSort(array, 0, array.length - 1);
-        System.out.println("Sorting using Quick Sort");
+
         return steps;
     }
 
