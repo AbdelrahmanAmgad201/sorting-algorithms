@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class NonComparisonSortTest {
 
     void runTest(int[] input, int[] expected) {
-        SortingStrategy sorter = new NonComparisonSort();
+        SortingStrategy sorter = NonComparisonSort.getInstance();
 
         long startTime = System.nanoTime();
         List<int[]> steps = sorter.sort(input.clone());

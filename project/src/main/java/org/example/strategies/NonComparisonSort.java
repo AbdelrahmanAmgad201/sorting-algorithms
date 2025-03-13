@@ -5,7 +5,21 @@ import org.example.strategies.NonComparisonSorters.RadixSortStrategy;
 import java.util.List;
 
 public class NonComparisonSort implements SortingStrategy {
-    SortingStrategy sortMethod;
+    private static NonComparisonSort instance;
+    private SortingStrategy sortMethod;
+
+    private NonComparisonSort() {}
+
+    public static NonComparisonSort getInstance() {
+        if (instance == null) {
+            synchronized (NonComparisonSort.class) {
+                if (instance == null) {
+                    instance = new NonComparisonSort();
+                }
+            }
+        }
+        return instance;
+    }
 
     @Override
     public List<int[]> sort(int[] array) {
@@ -23,25 +37,21 @@ public class NonComparisonSort implements SortingStrategy {
 
         int range = maxValue - minValue;
         if (range <= 10 * array.length) {
-            if (sortMethod instanceof CountingSortStrategy) {
-                ((CountingSortStrategy) sortMethod).setMaxMinValues(maxValue, minValue);
+            if (!(sortMethod instanceof CountingSortStrategy)) {
+                sortMethod = new CountingSortStrategy(maxValue, minValue);
             } else {
-                setSortingAlgorithm(new CountingSortStrategy(maxValue, minValue));
+                ((CountingSortStrategy) sortMethod).setMaxMinValues(maxValue, minValue);
             }
             System.out.println("Chosen sorting strategy is COUNTING SORT method");
         } else {
-            if (sortMethod instanceof RadixSortStrategy) {
-                ((RadixSortStrategy) sortMethod).setMaxMinValues(maxValue, minValue);
+            if (!(sortMethod instanceof RadixSortStrategy)) {
+                sortMethod = new RadixSortStrategy(maxValue, minValue);
             } else {
-                setSortingAlgorithm(new RadixSortStrategy(maxValue, minValue));
+                ((RadixSortStrategy) sortMethod).setMaxMinValues(maxValue, minValue);
             }
             System.out.println("Chosen sorting strategy is RADIX SORT method");
         }
 
         return sortMethod.sort(array);
-    }
-
-    void setSortingAlgorithm(SortingStrategy sort) {
-        this.sortMethod = sort;
     }
 }

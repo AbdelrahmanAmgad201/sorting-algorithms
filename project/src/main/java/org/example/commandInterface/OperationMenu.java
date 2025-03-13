@@ -61,7 +61,7 @@ public class OperationMenu implements State {
                     sortArray.setSortingStrategy(new QuickSortStrategy());
                     break;
                 case "4":
-                    sortArray.setSortingStrategy(new NonComparisonSort());
+                    sortArray.setSortingStrategy(NonComparisonSort.getInstance());
                     break;
                 default:
                     errorMsg = "Invalid Input";
