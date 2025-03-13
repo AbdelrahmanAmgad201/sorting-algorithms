@@ -43,6 +43,7 @@ public class CountingSortStrategy implements SortingStrategy, countingSort {
             int currentNumber = arr[i];
             output[count[currentNumber - minValue] - 1] = currentNumber;
             count[currentNumber - minValue]--;
+            steps.add(output.clone()); // Store sorted step
         }
 
         System.arraycopy(output, 0, arr, 0, n);
