@@ -2,6 +2,6 @@
 2) Sorting Algorithms
 	O(n^2)
 	O(n logn) DONE
-	O(n)
+	O(n)	  DONE
 3) Main Function
 4) Unit Tests 
