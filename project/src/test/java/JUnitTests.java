@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
-public class BubbleSortTests {
+public class JUnitTests {
     SortingStrategy[] Sorters={new BubbleSortStrategy(),new MergeSortStrategy(),new QuickSortStrategy(),NonComparisonSort.getInstance()};
     int[][][] testCases = {
             // Test Case 1: Already sorted
@@ -63,7 +63,7 @@ public class BubbleSortTests {
 
             // Test Case 20: Array with three elements
             {{3, 1, 2}, {1, 2, 3}}
-        };
+    };
 
     void HelperFunction(List<Double> durationsTaken,int []input,int[]expectedOutput){
         for(int i=0;i<Sorters.length;i++) {
@@ -76,10 +76,12 @@ public class BubbleSortTests {
             int[] output = steps.get(steps.size()-1);
             assertArrayEquals(expectedOutput,output);
         }
-        System.out.println("BubbleSort took "+durationsTaken.get(0)+ " milliseconds");
-        System.out.println("Merge took "+durationsTaken.get(1)+ " milliseconds");
-        System.out.println("Quick Sort took "+durationsTaken.get(2)+ " milliseconds");
-        System.out.println("Radix Sort took "+durationsTaken.get(3)+ " milliseconds");
+        System.out.println("Bubble Sort took "+durationsTaken.get(0)+ " milliseconds");
+        System.out.println("Merge Sort took "+durationsTaken.get(1)+ " milliseconds");
+        System.out.println("Quick took "+durationsTaken.get(2)+ " milliseconds");
+        System.out.println("Non comparison sort took "+durationsTaken.get(3)+ " milliseconds");
+
+
     }
     @Test
     public void Test0(){
@@ -99,7 +101,7 @@ public class BubbleSortTests {
 
     }
     @Test
-    public void Test2(){
+    public void Test2(){//this test is an empty array and it fails
         int []input=testCases[2][0];
         int []expectedOutput=testCases[2][1];
         List<Double> durationsTaken=new ArrayList<>(); //this array holds the values in milliseconds;
@@ -108,15 +110,15 @@ public class BubbleSortTests {
     }
 
     @Test
-    public void Test3() {
-        int[] input = {5};
-        int[] expectedOutput = {5};
+    public void Test3() {//this test is an array os size 1 array and it fails
+        int []input=testCases[3][0];
+        int []expectedOutput=testCases[3][1];
         List<Double> durationsTaken = new ArrayList<>(); // This array holds the values in milliseconds
 
         // Include both BubbleSortStrategy and MergeSortStrategy
-        SortingStrategy[] sorters = {new BubbleSortStrategy(),new MergeSortStrategy(),new QuickSortStrategy(), NonComparisonSort.getInstance()};
 
-       HelperFunction(durationsTaken,input,expectedOutput);
+
+        HelperFunction(durationsTaken,input,expectedOutput);
     }
 
     @Test
@@ -159,9 +161,9 @@ public class BubbleSortTests {
         List<Double> durationsTaken = new ArrayList<>(); // This array holds the values in milliseconds
 
         // Include both BubbleSortStrategy and MergeSortStrategy
-        SortingStrategy[] sorters = {new BubbleSortStrategy(),new MergeSortStrategy(),new QuickSortStrategy(), NonComparisonSort.getInstance()};
 
-       HelperFunction(durationsTaken,input,expectedOutput);
+
+        HelperFunction(durationsTaken,input,expectedOutput);
     }
 
     @Test
@@ -204,9 +206,9 @@ public class BubbleSortTests {
         List<Double> durationsTaken = new ArrayList<>(); // This array holds the values in milliseconds
 
         // Include both BubbleSortStrategy and MergeSortStrategy
-        SortingStrategy[] sorters = {new BubbleSortStrategy(),new MergeSortStrategy(),new QuickSortStrategy(), NonComparisonSort.getInstance()};
 
-       HelperFunction(durationsTaken,input,expectedOutput);
+
+        HelperFunction(durationsTaken,input,expectedOutput);
     }
 
     @Test
@@ -247,8 +249,8 @@ public class BubbleSortTests {
         List<Double> durationsTaken = new ArrayList<>(); // This array holds the values in milliseconds
 
         // Include both BubbleSortStrategy and MergeSortStrategy
-        SortingStrategy[] sorters = {new BubbleSortStrategy(),new MergeSortStrategy(),new QuickSortStrategy(), NonComparisonSort.getInstance()};
 
-       HelperFunction(durationsTaken,input,expectedOutput);
+
+        HelperFunction(durationsTaken,input,expectedOutput);
     }
 }
