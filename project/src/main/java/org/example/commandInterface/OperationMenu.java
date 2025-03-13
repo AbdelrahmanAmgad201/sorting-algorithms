@@ -2,10 +2,8 @@ package org.example.commandInterface;
 
 import java.util.Scanner;
 
-import org.example.strategies.BubbleSortStrategy;
-import org.example.strategies.MergeSortStrategy;
-import org.example.strategies.QuickSortStrategy;
-import org.example.strategies.SortArray;
+import org.example.strategies.*;
+import org.example.strategies.NonComparisonSorters.RadixSortStrategy;
 
 public class OperationMenu implements State {
     State nextState;
@@ -61,7 +59,10 @@ public class OperationMenu implements State {
                     break;
                 case "3":
                     sortArray.setSortingStrategy(new QuickSortStrategy());
-                    break;                    
+                    break;
+                case "4":
+                    sortArray.setSortingStrategy(new NonComparisonSort());
+                    break;
                 default:
                     errorMsg = "Invalid Input";
                     continue;
