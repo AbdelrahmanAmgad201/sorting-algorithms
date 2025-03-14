@@ -292,4 +292,38 @@ public class JUnitTests {
         HelperFunction(input, expected);
     }
 
+
+    @Test
+    public void Test21() {
+        int[] input = new int[10000];
+        for (int i = 0; i < 10000; i++) {
+            input[i] = (int) (Math.random() * 1000000);
+        }
+        int[] expected = input.clone();
+        java.util.Arrays.sort(expected);
+        HelperFunction(input, expected);
+    }
+
+    @Test
+    public void Test22() {
+        int[] input = new int[5000];
+        for (int i = 0; i < 5000; i++) {
+            input[i] = (int) (Math.random() * 1000000);
+        }
+        int[] expected = input.clone();
+        java.util.Arrays.sort(expected);
+        HelperFunction(input, expected);
+    }
+
+    @Test
+    public void Test23() {
+        int[] input = new int[1000];
+        for (int i = 0; i < 1000; i++) {
+            input[i] = (int) (Math.random() * 1000000);
+        }
+        int[] expected = input.clone();
+        java.util.Arrays.sort(expected);
+        HelperFunction(input, expected);
+    }
+
 }
