@@ -80,7 +80,6 @@ public class JUnitTests {
         System.out.println("Bubble Sort took "+durationsTaken.get(0)+ " milliseconds");
         System.out.println("Merge Sort took "+durationsTaken.get(1)+ " milliseconds");
         System.out.println("Quick took "+durationsTaken.get(2)+ " milliseconds");
-        System.out.println("Non comparison sort took "+durationsTaken.get(3)+ " milliseconds");
 
 
     }

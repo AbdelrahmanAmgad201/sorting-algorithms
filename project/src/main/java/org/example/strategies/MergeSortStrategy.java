@@ -7,6 +7,10 @@ public class MergeSortStrategy implements SortingStrategy {
     @Override
     public List<int[]> sort(int[] array) {
         List<int[]> steps = new ArrayList<>();
+        if (array.length <= 1) {
+            steps.add(array.clone()); // Ensure at least one step is recorded
+            return steps;
+        }
         mergeSort(array, 0, array.length - 1, steps);
         return steps;
     }
@@ -42,6 +46,6 @@ public class MergeSortStrategy implements SortingStrategy {
         while (i < n1) arr[k++] = leftArr[i++];
         while (j < n2) arr[k++] = rightArr[j++];
 
-        steps.add(arr.clone());
+        steps.add(arr.clone()); // Capture the sorting step
     }
 }

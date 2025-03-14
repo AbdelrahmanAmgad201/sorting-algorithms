@@ -9,10 +9,22 @@ public class QuickSortStrategy implements SortingStrategy {
     @Override
     public List<int[]> sort(int[] array) {
         steps = new ArrayList<>();
+        
+        if (array.length == 0) {
+            steps.add(new int[]{});
+            return steps; // Don't add anything, return empty list
+        }
+        
+        if (array.length == 1) {
+            steps.add(array.clone()); // Keep step for single-element array
+            return steps;
+        }
+        
         quickSort(array, 0, array.length - 1);
-
         return steps;
     }
+    
+
 
     void quickSort(int[] array, int low, int high) {
         if (low < high) {

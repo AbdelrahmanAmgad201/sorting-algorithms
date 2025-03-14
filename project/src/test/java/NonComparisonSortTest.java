@@ -1,6 +1,8 @@
 import org.example.strategies.NonComparisonSort;
 import org.example.strategies.SortingStrategy;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +16,10 @@ class NonComparisonSortTest {
         long endTime = System.nanoTime();
 
         long duration = endTime - startTime;
-        System.out.println("Sorting execution time: " + duration / 1000 + " µs");
+        System.out.println("Sorting of non comparison with overhead took: " + duration / 1_000_000.0 + " ms");
+
+
+        System.out.println(Arrays.toString(steps.getFirst()));
 
         assertNotNull(steps);
         assertFalse(steps.isEmpty());
@@ -66,6 +71,20 @@ class NonComparisonSortTest {
         int[] input = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8, 4, 6, 2, 6, 4, 3, 3, 8, 3, 2, 7, 9, 5, 0, 2, 8, 8, 4, 1, 9, 7, 1, 6, 9, 3, 9, 9, 3, 7, 5, 1, 0, 5, 8, 2, 0, 9, 7, 4, 9, 4, 4, 5, 9};
         int[] expected = input.clone();
         java.util.Arrays.sort(expected);
+        runTest(input, expected);
+    }
+
+    @Test
+    void emptyArray() {
+        int[] input = {};
+        int[] expected = {};
+        runTest(input, expected);
+    }
+
+    @Test
+    void oneElementArray() {
+        int[] input = {5};
+        int[] expected = {5};
         runTest(input, expected);
     }
 
